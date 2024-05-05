@@ -5,7 +5,7 @@ import { verifyToken } from "../middleware/index.js";
 const router = express.Router();
 
 router.get("/key", getPaymentKey);
-router.post("/verify",verifyToken, paymentVerification);
+router.post("/verify", paymentVerification);
 
 export default router;
 
