@@ -3,6 +3,7 @@ import Bookings from "../models/Bookings.js";
 import Seat from "../models/Seat.js";
 import crypto from "crypto";
 import CustomError from "../libs/error.js";
+import { sendEmail } from "../libs/utils.js";
 
 export const paymentVerification = async (req, res) => {
   try {
@@ -29,6 +30,8 @@ export const paymentVerification = async (req, res) => {
       })
     );
 
+    sendEmail(updateBooking.user.email, "Booking Confirmed", `Your Booking is confirmed with Booking Id: ${updateBooking._id}`);
+    
     res.redirect(`https://payment-gateway-api-iota.vercel.app/paymentsucess?reference=${razorpay_payment_id}`)
 
   } catch (error) {
