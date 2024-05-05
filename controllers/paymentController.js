@@ -1,4 +1,4 @@
-import Payment from "../models/payment.js";
+import Payment from "../models/Payment.js";
 import Bookings from "../models/Bookings.js";
 import Seat from "../models/Seat.js";
 import crypto from "crypto";
