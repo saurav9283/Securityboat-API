@@ -7,6 +7,7 @@ import { sendEmail } from "../libs/utils.js";
 
 export const paymentVerification = async (req, res) => {
   try {
+    const user = req.user;
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
     const bookingId= req.query.bookingId;
 
@@ -30,8 +31,8 @@ export const paymentVerification = async (req, res) => {
       })
     );
 
-    sendEmail(updateBooking.user.email, "Booking Confirmed", `Your Booking is confirmed with Booking Id: ${updateBooking._id}`);
-    
+    sendEmail(user.email, "Booking Confirmed", `Your Booking is confirmed with Booking Id: ${updateBooking._id}`);
+
     res.redirect(`https://payment-gateway-api-iota.vercel.app/paymentsucess?reference=${razorpay_payment_id}`)
 
   } catch (error) {

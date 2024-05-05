@@ -38,7 +38,7 @@ export const login = async (req, res, next) => {
     const userObj = user.toJSON();
     delete userObj.password;
 
-    const token = jwt.sign({ id: userObj._id, isAdmin: userObj.isAdmin }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: userObj._id, isAdmin: userObj.isAdmin,email:userObj.email }, process.env.JWT_SECRET);
     res.cookie("access_token", token, { httpOnly: true }).status(200).send({ data: userObj, token });
 
   } catch (err) {
